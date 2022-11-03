@@ -6,7 +6,3 @@ User Story: We need a system that will help us to automate and track our works. 
 2. We will accept collect request and assign an employee to collect the foods.
 3. After collection the foods will be distributed by our employee and upon completion the collect request will be completed.
 4. System also needs to track all collect requests and their details.
-
-## Assignment:
-
-Do Whatever you can (using your wisdom not your friends), to help this NGO.

@@ -129,6 +129,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RestaurantController.cs" />
     <Compile Include="Global.asax.cs">
@@ -219,6 +220,13 @@
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Restaurant\Add.cshtml" />
     <Content Include="Views\Restaurant\All.cshtml" />
+    <Content Include="Views\Restaurant\Details.cshtml" />
+    <Content Include="Views\Restaurant\Edit.cshtml" />
+    <Content Include="Views\Employee\All.cshtml" />
+    <Content Include="Views\Employee\Add.cshtml" />
+    <Content Include="Views\Employee\Details.cshtml" />
+    <Content Include="Views\Employee\Edit.cshtml" />
+    <Content Include="Views\Restaurant\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

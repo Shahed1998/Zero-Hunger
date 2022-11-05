@@ -1,36 +1,30 @@
-﻿@model IEnumerable<server.Models.Employee>
-
+﻿
 @{
-    ViewBag.Title = "Assign Employee";
+    ViewBag.Title = "Assign_Employee";
 }
 
 <h2>Assign Employee</h2>
-<form method="post">
-    <table class="table">
-        <tr>
-            <th>Id</th>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th></th>
-        </tr>
 
-        @foreach (var item in Model)
+<form method="post">
+
+    <label for="employees">Choose an employee:</label>
+
+    <select name="EmId" id="employees">
+        <option value="">Please select an employee</option>
+        @foreach (var items in Model)
         {
-            if (item.isAvailable == 1)
+            if (items.isAvailable == 1)
             {
-                var val = item.Id;
-                <tr>
-                    <td><input type="number" name="EmpId" value=@val /></td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        <input type="submit" value="Assign" class="btn btn-success" />
-                    </td>
-                </tr>
+                <option value=@items.Id>@items.Name</option>
             }
+            
         }
 
-        </table>
+    </select>
+    <br/>
+    <input type="submit"  value="Select employee" class="btn btn-primary" />
 </form>
+<br/>
+<p>
+    @Html.ActionLink("Back to list", "All_Admin_Request")
+</p>

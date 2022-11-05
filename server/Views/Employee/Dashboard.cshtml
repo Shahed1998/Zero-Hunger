@@ -1,0 +1,27 @@
+﻿
+@model server.Models.Employee
+
+@{
+    ViewBag.Title = "Dashboard";
+}
+
+<h2>Dashboard</h2>
+
+<div>
+    <section>
+        <h4>@Model.Name</h4>
+    </section>
+    <hr />
+
+    <section>
+
+        @if (Model.isAvailable == 0)
+        {
+            <a href="/Employee/Collection_Details/@Model.Id" class="btn btn-info">Collection Details</a>
+        }
+
+        <a href="/Employee/Logout" class="btn btn-danger">Logout</a>
+
+    </section><br />
+</div>
+

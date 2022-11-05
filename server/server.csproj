@@ -236,6 +236,9 @@
     <Content Include="Views\Request\All_Admin_Request.cshtml" />
     <Content Include="Views\Request\Admin_Request_Details.cshtml" />
     <Content Include="Views\Request\Assign_Employee.cshtml" />
+    <Content Include="Views\Employee\Login.cshtml" />
+    <Content Include="Views\Employee\Dashboard.cshtml" />
+    <Content Include="Views\Employee\Collection_Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

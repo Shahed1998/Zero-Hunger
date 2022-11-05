@@ -128,25 +128,57 @@ namespace server.Controllers
         }
 
         [HttpPost]
-        public ActionResult Assign_Employee(Zero_hungerEntities3 db, int EmpId, int Id, Request request)
+        public ActionResult Assign_Employee(Zero_hungerEntities3 db, Request request, Employee employee, int Id, int EmId)
         {
-            var ext = (from row in db.Requests
+            var req = (from row in db.Requests
                        where row.Id == Id
-                       select row).FirstOrDefault();
+                       select row).SingleOrDefault();
 
+            request = req;
+            request.EmployeeId = EmId;
+            db.Entry(req).CurrentValues.SetValues(request);
+            db.SaveChanges();
 
-            request = ext;
-            request.EmployeeId = EmpId;
+            var emp = (from row in db.Employees
+                       where row.Id == EmId
+                       select row).SingleOrDefault();
 
+            employee = emp;
+            employee.isAvailable = 0;
+            db.Entry(emp).CurrentValues.SetValues(employee);
+            db.SaveChanges();
 
-            db.Entry(ext).CurrentValues.SetValues(request);
+            return RedirectToAction("All_Admin_Request");
+        }
+
+        [HttpGet]
+        public ActionResult Delete(Zero_hungerEntities3 db, int Id, Employee employee)
+        {
+            var req = (from row in db.Requests
+                       where row.Id == Id
+                       select row).SingleOrDefault();
+
+            var EmId = req.EmployeeId;
+
+            db.Requests.Remove(req);
+
+            var emp = (from row in db.Employees
+                       where row.Id == EmId
+                       select row).SingleOrDefault();
+
+            employee = emp;
+
+            employee.isAvailable = 1;
+
+            db.Entry(emp).CurrentValues.SetValues(employee);
+
             db.SaveChanges();
 
             return RedirectToAction("All_Admin_Request");
 
-            
-
 
         }
+
+
     }
 }

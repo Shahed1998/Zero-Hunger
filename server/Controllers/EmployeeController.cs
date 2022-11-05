@@ -10,7 +10,7 @@ namespace server.Controllers
     public class EmployeeController : Controller
     {
         [HttpGet]
-        public ActionResult All(Zero_hungerEntities1 db)
+        public ActionResult All(Zero_hungerEntities3 db)
         {
             var employees = db.Employees.ToList();
             return View(employees);
@@ -23,7 +23,7 @@ namespace server.Controllers
         }
 
         [HttpPost]
-        public ActionResult Add(Zero_hungerEntities1 db, Employee employee, string Name)
+        public ActionResult Add(Zero_hungerEntities3 db, Employee employee, string Name)
         {
             employee.Name = Name;
             employee.isAvailable = 1;
@@ -33,7 +33,7 @@ namespace server.Controllers
         }
 
         [HttpGet]
-        public ActionResult Details(Zero_hungerEntities1 db, int id)
+        public ActionResult Details(Zero_hungerEntities3 db, int id)
         {
             var employee = (from row in db.Employees
                             where row.Id == id
@@ -42,7 +42,7 @@ namespace server.Controllers
         }
 
         [HttpGet]
-        public ActionResult Edit(Zero_hungerEntities1 db, int id)
+        public ActionResult Edit(Zero_hungerEntities3 db, int id)
         {
             var employee = (from row in db.Employees
                             where row.Id == id
@@ -52,7 +52,7 @@ namespace server.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(Zero_hungerEntities1 db, Employee employee, string Name, int Id)
+        public ActionResult Edit(Zero_hungerEntities3 db, Employee employee, string Name, int Id)
         {
             
 
@@ -70,7 +70,7 @@ namespace server.Controllers
         }
 
         [HttpGet]
-        public ActionResult Delete(Zero_hungerEntities1 db, int id)
+        public ActionResult Delete(Zero_hungerEntities3 db, int id)
         {
             var employee = (from row in db.Employees
                             where row.Id == id

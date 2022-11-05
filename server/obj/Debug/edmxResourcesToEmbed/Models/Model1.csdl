@@ -15,7 +15,7 @@
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="RestaurantId" Type="Int32" Nullable="false" />
-    <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+    <Property Name="EmployeeId" Type="Int32" />
     <Property Name="IssuedAt" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="PreserveUntil" Type="DateTime" Nullable="false" Precision="0" />
     <NavigationProperty Name="Employee" Relationship="Self.FK_Requests_Employees" FromRole="Requests" ToRole="Employees" />
@@ -41,7 +41,7 @@
     <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
   <Association Name="FK_Requests_Employees">
-    <End Role="Employees" Type="Self.Employee" Multiplicity="1" />
+    <End Role="Employees" Type="Self.Employee" Multiplicity="0..1" />
     <End Role="Requests" Type="Self.Request" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Employees">
@@ -64,7 +64,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="Zero_hungerEntities1" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="Zero_hungerEntities3" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Employees" EntityType="Self.Employee" />
     <EntitySet Name="Requests" EntityType="Self.Request" />
     <EntitySet Name="Restaurants" EntityType="Self.Restaurant" />

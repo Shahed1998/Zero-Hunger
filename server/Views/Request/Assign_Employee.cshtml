@@ -1,0 +1,36 @@
+﻿@model IEnumerable<server.Models.Employee>
+
+@{
+    ViewBag.Title = "Assign Employee";
+}
+
+<h2>Assign Employee</h2>
+<form method="post">
+    <table class="table">
+        <tr>
+            <th>Id</th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            if (item.isAvailable == 1)
+            {
+                var val = item.Id;
+                <tr>
+                    <td><input type="number" name="EmpId" value=@val /></td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        <input type="submit" value="Assign" class="btn btn-success" />
+                    </td>
+                </tr>
+            }
+        }
+
+        </table>
+</form>

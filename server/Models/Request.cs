@@ -16,7 +16,7 @@ namespace server.Models
     {
         public int Id { get; set; }
         public int RestaurantId { get; set; }
-        public int EmployeeId { get; set; }
+        public Nullable<int> EmployeeId { get; set; }
         public System.DateTime IssuedAt { get; set; }
         public System.DateTime PreserveUntil { get; set; }
     

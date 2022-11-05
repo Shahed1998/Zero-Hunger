@@ -14,7 +14,7 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="RestaurantId" Type="int" Nullable="false" />
-    <Property Name="EmployeeId" Type="int" Nullable="false" />
+    <Property Name="EmployeeId" Type="int" />
     <Property Name="IssuedAt" Type="date" Nullable="false" />
     <Property Name="PreserveUntil" Type="date" Nullable="false" />
   </EntityType>
@@ -37,7 +37,7 @@
     <Property Name="definition" Type="varbinary(max)" />
   </EntityType>
   <Association Name="FK_Requests_Employees">
-    <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
+    <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
     <End Role="Requests" Type="Self.Requests" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Employees">

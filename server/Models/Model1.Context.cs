@@ -13,10 +13,10 @@ namespace server.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Zero_hungerEntities1 : DbContext
+    public partial class Zero_hungerEntities3 : DbContext
     {
-        public Zero_hungerEntities1()
-            : base("name=Zero_hungerEntities1")
+        public Zero_hungerEntities3()
+            : base("name=Zero_hungerEntities3")
         {
         }
     

@@ -9,14 +9,29 @@ namespace server.Controllers
 {
     public class RestaurantController : Controller
     {
+        public bool SessionIsSet()
+        {
+            if (Session["RestaurantId"] == null)
+            {
+                return false ;
+            }
+
+            return true;
+        }
+
         [HttpGet]
         public ActionResult Login()
         {
+            if (Session["RestaurantId"] != null)
+            {
+                return RedirectToAction("Dashboard");
+            }
+
             return View();
         }
 
         [HttpPost]
-        public ActionResult Login(Zero_hungerEntities1 db, string Name)
+        public ActionResult Login(Zero_hungerEntities3 db, string Name)
         {
             var restaurant = (from row in db.Restaurants
                               where row.Name == Name
@@ -25,7 +40,7 @@ namespace server.Controllers
             if (restaurant != null)
             {
                 Session["RestaurantId"] = restaurant.Id;
-                return RedirectToAction("All");
+                return RedirectToAction("Dashboard");
             }
 
             TempData["loginMsg"] = "User not found";
@@ -33,7 +48,37 @@ namespace server.Controllers
         }
 
         [HttpGet]
-        public ActionResult All(Zero_hungerEntities1 db)
+        public ActionResult Logout()
+        {
+            Session["RestaurantId"] = null;
+            return RedirectToAction("Login");
+        }
+
+        [HttpGet]
+        public ActionResult Dashboard(Zero_hungerEntities3 db)
+        {
+            if (Session["RestaurantId"] == null)
+            {
+                return RedirectToAction("Login");
+            }
+
+            var restaurantId = Int32.Parse(Session["RestaurantId"].ToString());
+
+            var restaurant = (from row in db.Restaurants
+                              where row.Id == restaurantId
+                              select row).FirstOrDefault();
+
+            if (restaurant == null)
+            {
+                Session["RestaurantId"] = null;
+                return RedirectToAction("Dashboard");
+            }
+
+            return View(restaurant);
+        }
+
+        [HttpGet]
+        public ActionResult All(Zero_hungerEntities3 db)
         {
             var restaurants = db.Restaurants.ToList();
             return View(restaurants);
@@ -46,7 +91,7 @@ namespace server.Controllers
         }
 
         [HttpPost]
-        public ActionResult Add(Zero_hungerEntities1 db, Restaurant restaurant)
+        public ActionResult Add(Zero_hungerEntities3 db, Restaurant restaurant)
         {
             db.Restaurants.Add(restaurant);
             db.SaveChanges();
@@ -55,7 +100,7 @@ namespace server.Controllers
         }
 
         [HttpGet]
-        public ActionResult Delete(Zero_hungerEntities1 db, int id)
+        public ActionResult Delete(Zero_hungerEntities3 db, int id)
         {
             var restaurant = (
                     from row in db.Restaurants
@@ -74,7 +119,7 @@ namespace server.Controllers
         }
 
         [HttpGet]
-        public ActionResult Details(Zero_hungerEntities1 db, int id)
+        public ActionResult Details(Zero_hungerEntities3 db, int id)
         {
             var res = (from row in db.Restaurants
                        where row.Id == id
@@ -83,7 +128,7 @@ namespace server.Controllers
         }
 
         [HttpGet]
-        public ActionResult Edit(Zero_hungerEntities1 db, int id)
+        public ActionResult Edit(Zero_hungerEntities3 db, int id)
         {
             var res = (from row in db.Restaurants
                        where row.Id == id
@@ -92,7 +137,7 @@ namespace server.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(Zero_hungerEntities1 db, Restaurant restaurant)
+        public ActionResult Edit(Zero_hungerEntities3 db, Restaurant restaurant)
         {
             var ext = (from row in db.Restaurants
                     where row.Id == restaurant.Id
@@ -104,5 +149,7 @@ namespace server.Controllers
             TempData["editMsg"] = "Updated successfully";
             return RedirectToAction("Edit");
         }
+
+        
     }
 }

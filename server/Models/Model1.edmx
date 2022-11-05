@@ -19,7 +19,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="RestaurantId" Type="int" Nullable="false" />
-          <Property Name="EmployeeId" Type="int" Nullable="false" />
+          <Property Name="EmployeeId" Type="int" />
           <Property Name="IssuedAt" Type="date" Nullable="false" />
           <Property Name="PreserveUntil" Type="date" Nullable="false" />
         </EntityType>
@@ -42,7 +42,7 @@
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <Association Name="FK_Requests_Employees">
-          <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
           <End Role="Requests" Type="Self.Requests" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Employees">
@@ -99,7 +99,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="RestaurantId" Type="Int32" Nullable="false" />
-          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="EmployeeId" Type="Int32" />
           <Property Name="IssuedAt" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="PreserveUntil" Type="DateTime" Nullable="false" Precision="0" />
           <NavigationProperty Name="Employee" Relationship="Self.FK_Requests_Employees" FromRole="Requests" ToRole="Employees" />
@@ -125,7 +125,7 @@
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <Association Name="FK_Requests_Employees">
-          <End Role="Employees" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Employees" Type="Self.Employee" Multiplicity="0..1" />
           <End Role="Requests" Type="Self.Request" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Employees">
@@ -148,7 +148,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Zero_hungerEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="Zero_hungerEntities3" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Employees" EntityType="Self.Employee" />
           <EntitySet Name="Requests" EntityType="Self.Request" />
           <EntitySet Name="Restaurants" EntityType="Self.Restaurant" />
@@ -167,7 +167,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Zero_hungerModelStoreContainer" CdmEntityContainer="Zero_hungerEntities1">
+        <EntityContainerMapping StorageEntityContainer="Zero_hungerModelStoreContainer" CdmEntityContainer="Zero_hungerEntities3">
           <EntitySetMapping Name="Employees">
             <EntityTypeMapping TypeName="Zero_hungerModel.Employee">
               <MappingFragment StoreEntitySet="Employees">
